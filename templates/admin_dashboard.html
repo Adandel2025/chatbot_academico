@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Dashboard</title>
+
+<style>
+
+/* -----------------------------------
+FONDO CORPORATIVO
+----------------------------------- */
+body{
+font-family:'Segoe UI', Tahoma, sans-serif;
+background:url('/static/img/fondo.jpg') no-repeat center center fixed;
+background-size:cover;
+margin:0;
+padding:0;
+color:#dce7f0;
+}
+
+.filtro{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.65);
+backdrop-filter:blur(9px);
+z-index:-1;
+}
+
+/* -----------------------------------
+CONTENEDOR
+----------------------------------- */
+.container{
+max-width:900px;
+margin:50px auto;
+padding:35px;
+background:rgba(18,22,30,0.78);
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.06);
+box-shadow:0 0 26px rgba(0,0,0,0.6);
+backdrop-filter:blur(14px);
+}
+
+h2,h3{
+text-align:center;
+color:#2196f3;
+font-weight:900;
+letter-spacing:1px;
+text-shadow:0 0 10px rgba(33,150,243,0.4);
+}
+
+/* -----------------------------------
+MENSAJES FLASH
+----------------------------------- */
+.flash{
+padding:12px;
+margin-bottom:20px;
+border-radius:8px;
+font-weight:bold;
+text-align:center;
+animation:fadein 0.5s;
+}
+
+.flash-success{
+background:#0555c7;
+color:white;
+}
+
+.flash-error{
+background:#c62828;
+color:white;
+}
+
+@keyframes fadein{
+from{opacity:0;transform:translateY(-10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* -----------------------------------
+NAV
+----------------------------------- */
+.nav-links{
+text-align:center;
+margin-bottom:20px;
+}
+
+.nav-links a{
+color:white;
+background:#2196f3;
+font-weight:bold;
+text-decoration:none;
+margin:0 12px;
+padding:10px 16px;
+border-radius:10px;
+transition:0.25s;
+box-shadow:0 0 14px rgba(33,150,243,0.35);
+}
+
+.nav-links a:hover{
+background:#1976d2;
+box-shadow:0 0 20px rgba(33,150,243,0.55);
+}
+
+/* -----------------------------------
+BOTONES HISTORIAL
+----------------------------------- */
+
+.history-actions{
+text-align:center;
+margin-bottom:25px;
+}
+
+.btn-history-delete{
+background:#d32f2f;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-right:10px;
+box-shadow:0 0 14px rgba(211,47,47,0.4);
+}
+
+.btn-history-delete:hover{
+background:#b71c1c;
+}
+
+.btn-history-clean{
+background:#ff9800;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 14px rgba(255,152,0,0.4);
+}
+
+.btn-history-clean:hover{
+background:#f57c00;
+}
+
+/* -----------------------------------
+TABLA
+----------------------------------- */
+
+table{
+width:100%;
+border-collapse:collapse;
+color:#e2e2e2;
+}
+
+th{
+background:#2196f3;
+color:white;
+padding:12px;
+border-bottom:2px solid rgba(255,255,255,0.15);
+text-align:left;
+font-weight:bold;
+}
+
+td{
+padding:12px;
+background:rgba(255,255,255,0.05);
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+tr:hover td{
+background:rgba(33,150,243,0.12);
+}
+
+/* BOTONES ACCIÓN */
+
+.btn-delete{
+padding:8px 14px;
+background:#d32f2f;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.btn-delete:hover{
+background:#b71c1c;
+}
+
+.btn-edit{
+padding:8px 14px;
+background:#0369a8;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-right:6px;
+}
+
+.btn-edit:hover{
+background:#2e7d32;
+}
+
+/* BOTON VOLVER */
+
+.back-btn{
+position:fixed;
+top:20px;
+left:20px;
+background:#2196f3;
+color:white;
+padding:10px 16px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 0 14px rgba(33,150,243,0.45);
+transition:0.25s;
+z-index:9999;
+}
+
+.back-btn:hover{
+background:#1976d2;
+box-shadow:0 0 22px rgba(33,150,243,0.75);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="filtro"></div>
+
+<a href="/" class="back-btn">⬅ Regresar al Chatbot</a>
+
+<div class="container">
+
+<h2>Panel de Administración</h2>
+
+<div class="nav-links">
+<a href="/admin/add">Agregar contenido</a>
+<a href="/admin/history">Ver historial</a>
+<a href="/admin/logout">Salir</a>
+</div>
+
+<!-- BOTONES HISTORIAL -->
+
+<div class="history-actions">
+
+<form action="/admin/clear_history" method="post" style="display:inline"
+onsubmit="return confirm('¿Seguro que deseas borrar TODO el historial?')">
+
+<button class="btn-history-delete">
+🗑 Borrar todo el historial
+</button>
+
+</form>
+
+<form action="/admin/delete_old_history" method="post" style="display:inline"
+onsubmit="return confirm('¿Eliminar historial de más de 30 días?')">
+
+<button class="btn-history-clean">
+🧹 Limpiar historial antiguo
+</button>
+
+</form>
+
+</div>
+
+<!-- MENSAJES FLASH -->
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<div class="flash flash-success">
+{{ msg }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<h3>Contenidos</h3>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Tema</th>
+<th>Subtema</th>
+<th>Fecha</th>
+<th>Acción</th>
+</tr>
+
+{% for c in contenidos %}
+<tr>
+
+<td>{{ c.id }}</td>
+<td>{{ c.tema }}</td>
+<td>{{ c.subtema }}</td>
+<td>{{ c.created_at }}</td>
+
+<td>
+
+<a href="/admin/edit/{{ c.id }}">
+<button class="btn-edit">Editar</button>
+</a>
+
+<form action="/admin/delete/{{ c.id }}" method="post" style="display:inline"
+onsubmit="return confirm('¿Seguro que deseas eliminar este contenido?')">
+
+<button class="btn-delete">
+Eliminar
+</button>
+
+</form>
+
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+<script>
+
+setTimeout(()=>{
+let flash=document.querySelector(".flash");
+if(flash){
+flash.style.opacity="0";
+flash.style.transition="opacity 0.6s";
+setTimeout(()=>flash.remove(),600);
+}
+},3000);
+
+</script>
+
+</body>
+</html>

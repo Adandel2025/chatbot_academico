@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Historial</title>
+
+<style>
+
+/* FONDO */
+body{
+font-family:'Segoe UI', Tahoma, sans-serif;
+background:url('/static/img/fondo.jpg') no-repeat center center fixed;
+background-size:cover;
+margin:0;
+padding:0;
+color:#dce7f0;
+}
+
+/* Capa oscura */
+.filtro{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.60);
+backdrop-filter:blur(8px);
+z-index:-1;
+}
+
+/* CONTENEDOR */
+.container{
+max-width:1100px;
+margin:40px auto;
+padding:30px;
+background:rgba(18,22,30,0.78);
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.06);
+box-shadow:0 0 26px rgba(0,0,0,0.6);
+backdrop-filter:blur(14px);
+}
+
+h2{
+text-align:center;
+color:#2196f3;
+font-weight:900;
+letter-spacing:1px;
+text-shadow:0 0 10px rgba(33,150,243,0.4);
+margin-bottom:25px;
+}
+
+/* BOTÓN VOLVER */
+a.volver{
+display:inline-block;
+margin-bottom:15px;
+color:#2196f3;
+font-weight:bold;
+text-decoration:none;
+padding:8px 14px;
+border-radius:10px;
+border:1px solid rgba(33,150,243,0.4);
+box-shadow:0 0 12px rgba(33,150,243,0.35);
+transition:0.25s;
+}
+
+a.volver:hover{
+background:rgba(33,150,243,0.25);
+}
+
+/* BOTONES ADMIN */
+.actions{
+margin-bottom:20px;
+}
+
+.btn-clear{
+background:#b71c1c;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+margin-right:10px;
+box-shadow:0 0 12px rgba(211,47,47,0.35);
+}
+
+.btn-old{
+background:#ef6c00;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 12px rgba(255,152,0,0.35);
+}
+
+/* TABLA */
+table{
+width:100%;
+border-collapse:collapse;
+background:rgba(15,17,22,0.70);
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 18px rgba(0,0,0,0.45);
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+th{
+background:rgba(33,150,243,0.20);
+color:#2196f3;
+}
+
+tr:hover{
+background:rgba(33,150,243,0.10);
+}
+
+td{
+white-space:pre-wrap;
+max-width:350px;
+}
+
+/* BOTÓN ELIMINAR */
+.btn-delete{
+background:#c62828;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* BOTÓN REGRESAR CHATBOT */
+.back-btn{
+position:fixed;
+top:20px;
+left:20px;
+background:#2196f3;
+color:white;
+padding:10px 16px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="filtro"></div>
+
+<a href="/" class="back-btn">⬅ Regresar al Chatbot</a>
+
+<div class="container">
+
+<h2>Historial</h2>
+
+<a class="volver" href="/admin/dashboard">⬅ Volver</a>
+
+<div class="actions">
+
+<form action="/admin/clear_history" method="post" style="display:inline"
+onsubmit="return confirm('¿Eliminar TODO el historial?')">
+
+<button class="btn-clear">
+🗑 Borrar todo el historial
+</button>
+
+</form>
+
+<form action="/admin/delete_old_history" method="post" style="display:inline"
+onsubmit="return confirm('¿Eliminar historial de más de 30 días?')">
+
+<button class="btn-old">
+🧹 Limpiar historial antiguo
+</button>
+
+</form>
+
+</div>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Usuario</th>
+<th>Bot</th>
+<th>Fecha</th>
+<th>Acción</th>
+</tr>
+
+{% for h in history %}
+<tr>
+
+<td>{{ h.id }}</td>
+<td>{{ h.user_message }}</td>
+<td>{{ h.bot_response }}</td>
+<td>{{ h.created_at }}</td>
+
+<td>
+
+<form action="/admin/delete_history/{{ h.id }}" method="post"
+onsubmit="return confirm('¿Eliminar esta conversación?')">
+
+<button class="btn-delete">
+🗑 Eliminar
+</button>
+
+</form>
+
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

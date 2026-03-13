@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+
+<meta charset="utf-8">
+<title>Eliminar contenido</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#121212;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.box{
+background:#1e1e1e;
+padding:40px;
+border-radius:12px;
+width:420px;
+text-align:center;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+h2{
+color:#f44336;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+margin-top:15px;
+}
+
+.delete{
+background:#d32f2f;
+color:white;
+}
+
+.delete:hover{
+background:#b71c1c;
+}
+
+.cancel{
+background:#2196f3;
+color:white;
+text-decoration:none;
+padding:10px 20px;
+border-radius:6px;
+margin-left:10px;
+}
+
+.cancel:hover{
+background:#1976d2;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Eliminar contenido</h2>
+
+<p>¿Seguro que deseas eliminar este registro?</p>
+
+<p>
+<strong>Tema:</strong> {{contenido.tema}}<br>
+<strong>Subtema:</strong> {{contenido.subtema}}
+</p>
+
+<form method="POST">
+
+<button class="delete">
+Eliminar definitivamente
+</button>
+
+<a class="cancel" href="/admin/dashboard">
+Cancelar
+</a>
+
+</form>
+
+</div>
+
+</body>
+</html>

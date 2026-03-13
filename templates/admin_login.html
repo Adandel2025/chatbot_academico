@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Admin Login</title>
+
+  <style>
+
+   
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: url('/static/img/fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #dce7f0;
+    }
+
+    
+    .filtro {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(9px);
+      z-index: -1;
+    }
+
+  
+    .login-box {
+      width: 380px;
+      margin: 100px auto;
+      padding: 30px;
+      background: rgba(18, 22, 30, 0.78);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 0 26px rgba(0,0,0,0.6);
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #2196f3;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(33,150,243,0.4);
+      margin-bottom: 25px;
+    }
+
+  
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.45);
+      color:#e3edf8;
+      font-size:15px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.35);
+    }
+
+    input::placeholder {
+      color:#9bb3c9;
+    }
+
+   
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background:#2196f3;
+      color:white;
+      font-weight:bold;
+      border-radius:10px;
+      cursor:pointer;
+      transition: 0.25s;
+      box-shadow: 0 0 14px rgba(33,150,243,0.35);
+      font-size: 15px;
+    }
+
+    button:hover {
+      background:#1976d2;
+      box-shadow: 0 0 20px rgba(33,150,243,0.55);
+    }
+
+    /* ---------------------------
+       Botón regresar
+    ---------------------------- */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #2196f3;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 14px rgba(33,150,243,0.45);
+      transition: 0.25s;
+      z-index: 9999;
+    }
+
+    .back-btn:hover {
+      background: #1976d2;
+      box-shadow: 0 0 22px rgba(33,150,243,0.75);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="filtro"></div>
+
+  <a href="/" class="back-btn">⬅ Regresar al Chatbot</a>
+
+  <div class="login-box">
+    <h2>Admin Login</h2>
+
+    <form action="/admin/login" method="post">
+      <input name="username" placeholder="Usuario">
+      <input name="password" type="password" placeholder="Clave">
+
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+
+</body>
+</html>

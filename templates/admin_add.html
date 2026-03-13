@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Agregar Contenido</title>
+
+  <style>
+
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: url('/static/img/fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #e0e1dd;
+    }
+
+    .filtro {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.48);
+      backdrop-filter: blur(6px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 30px;
+      background: rgba(13, 27, 42, 0.70);
+      border-radius: 14px;
+      border: 1px solid rgba(119,141,169,0.25);
+      box-shadow: 0 0 20px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      text-align: center;
+      color: #4dd0e1;
+      text-shadow: 0 0 6px rgba(77,208,225,0.4);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #e0e1dd;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #415a77;
+      background: rgba(27,38,59,0.65);
+      color: #e0e1dd;
+      font-size: 15px;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.25);
+      transition: 0.25s;
+    }
+
+    input:focus, textarea:focus {
+      background: rgba(41,54,74,0.75);
+      border-color: #4dd0e1;
+      box-shadow: 0 0 12px rgba(77,208,225,0.4);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      background: #4dd0e1;
+      color: #0d1b2a;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 3px 14px rgba(77,208,225,0.35);
+      transition: 0.25s;
+    }
+
+    button:hover {
+      background: #35b7c8;
+      box-shadow: 0 4px 18px rgba(77,208,225,0.55);
+    }
+
+    .volver {
+      display: inline-block;
+      margin-top: 25px;
+      color: #4dd0e1;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 14px;
+      border: 1px solid rgba(77,208,225,0.45);
+      border-radius: 8px;
+      transition: 0.25s;
+    }
+
+    .volver:hover {
+      background: rgba(77,208,225,0.20);
+      box-shadow: 0 0 15px rgba(77,208,225,0.65);
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #4dd0e1;
+      color: #0d1b2a;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 14px rgba(77,208,225,0.55);
+      transition: 0.25s;
+    }
+
+    .back-btn:hover {
+      background: #35b7c8;
+      box-shadow: 0 0 22px rgba(77,208,225,0.75);
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="filtro"></div>
+
+<a href="/" class="back-btn">⬅ Regresar al Chatbot</a>
+
+<div class="container">
+
+<h2>Agregar Contenido</h2>
+
+<form action="/admin/add" method="post">
+
+<label>Tema:</label>
+<input name="tema" required>
+<br><br>
+
+<label>Subtema:</label>
+<input name="subtema" required>
+<br><br>
+
+<label>Contenido:</label>
+<textarea name="contenido" rows="8" required></textarea>
+<br><br>
+
+<!-- NUEVO CAMPO REFERENCIAS -->
+<label>Referencias:</label>
+<textarea name="referencias" rows="4" placeholder="Ejemplo: Libro, autor, enlace, etc."></textarea>
+
+<button type="submit">Guardar</button>
+
+</form>
+
+<p><a class="volver" href="/admin/dashboard">⬅ Volver</a></p>
+
+</div>
+
+</body>
+</html>
